@@ -11,19 +11,35 @@ import net.minecraft.client.Minecraft;
 * 
 * Provides an interface to the container for adding, removing, and "spring cleaning" quests, as well as ticking and notifying them.
 * Currently hooked up to Minecraft's World class because of the Player class' habit of clearing itself out on death.
+* 
+* In SSP, acts a singleton so mod users don't have to know where a particular instance actually exists.
 */
 public class QuestCollection extends Object implements INBTSerializable{
 	private mod_QuestKit questKit;
 	private List<IQuest> quests;
 	
+	private static QuestCollection singletonInstance = null;
+	/**
+	 * Return the last created singleton instance.
+	 *
+	 * @return Last created singleton instance.
+	 */
+	public static QuestCollection getSingletonInstance() {
+		return singletonInstance;
+	}
+	
 	/**
 	 * Create a new quest collection with a mod_QuestKit instance.
 	 *
 	 * @param newQuestKit The mod_QuestKit instance to be kept.
+	 * @param singletonInstance Should the created instance be stored as a singleton instance?
 	 */
-	public QuestCollection(mod_QuestKit newQuestKit) {
+	public QuestCollection(mod_QuestKit newQuestKit, boolean singletonInstance_p) {
 		questKit = newQuestKit;
 		quests = new LinkedList<IQuest>();
+		
+		if(singletonInstance_p)
+			singletonInstance = this;
 	}
 	
 	/**
