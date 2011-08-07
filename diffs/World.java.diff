@@ -1,0 +1,58 @@
+28a29,35
+>     
+> 
+>     private void initQuestCollection() {
+>         questCollection = new QuestCollection(mod_QuestKit.getModLoadedInstance());
+>         worldInfo.setQuestCollection(questCollection);
+>         questCollection.readFromNBT(worldInfo.getQuestCollectionTag());
+>     }
+44c51
+<         field_9437_g = (new Random()).nextInt();
+---
+>         updateLCG = (new Random()).nextInt();
+68a76
+>         initQuestCollection();
+85c93
+<         field_9437_g = (new Random()).nextInt();
+---
+>         updateLCG = (new Random()).nextInt();
+110a119
+>         initQuestCollection();
+132c141
+<         field_9437_g = (new Random()).nextInt();
+---
+>         updateLCG = (new Random()).nextInt();
+180a190
+>         initQuestCollection();
+1441a1452
+>         questCollection.updateQuests(ModLoader.getMinecraftInstance());
+2189,2190c2200,2201
+<                 field_9437_g = field_9437_g * 3 + 0x3c6ef35f;
+<                 int k1 = field_9437_g >> 2;
+---
+>                 updateLCG = updateLCG * 3 + 0x3c6ef35f;
+>                 int k1 = updateLCG >> 2;
+2209,2210c2220,2221
+<                 field_9437_g = field_9437_g * 3 + 0x3c6ef35f;
+<                 int l1 = field_9437_g >> 2;
+---
+>                 updateLCG = updateLCG * 3 + 0x3c6ef35f;
+>                 int l1 = updateLCG >> 2;
+2222,2223c2233,2234
+<                 field_9437_g = field_9437_g * 3 + 0x3c6ef35f;
+<                 int i2 = field_9437_g >> 2;
+---
+>                 updateLCG = updateLCG * 3 + 0x3c6ef35f;
+>                 int i2 = updateLCG >> 2;
+2244,2245c2255,2256
+<                 field_9437_g = field_9437_g * 3 + 0x3c6ef35f;
+<                 int k3 = field_9437_g >> 2;
+---
+>                 updateLCG = updateLCG * 3 + 0x3c6ef35f;
+>                 int k3 = updateLCG >> 2;
+2906c2917
+<     protected int field_9437_g;
+---
+>     protected int updateLCG;
+2937a2949
+> 	public QuestCollection questCollection;

@@ -1,0 +1,47 @@
+14,15c14
+< 
+<     public WorldInfo(NBTTagCompound nbttagcompound)
+---
+> 	public WorldInfo(NBTTagCompound nbttagcompound)
+34a34,36
+>         if(nbttagcompound.hasKey("Quests")) {
+>         	questsTag = nbttagcompound.getCompoundTag("Quests");
+>         }
+59a62
+>         questsTag = worldinfo.questsTag;
+65d67
+<         updateTagCompound(nbttagcompound, playerTag);
+83a86,91
+>         updateTagCompound(nbttagcompound, playerTag);
+>         try {
+> 	        if(questCollection != null) {
+> 	        	questCollection.writeToNBT(getQuestCollectionTag());
+> 	        }
+>         } /* the player compound might not be ready to edit. that's fine */ catch (NullPointerException e) {}
+105a114
+>         nbttagcompound.setCompoundTag("Quests", questsTag);
+250c259,276
+<     private long randomSeed;
+---
+>     public NBTTagCompound getQuestCollectionTag() {
+>     	if(questsTag != null)
+>     		return questsTag;
+>     	else {
+>     		questsTag = new NBTTagCompound();
+>     		return questsTag;
+>     	}
+>     }
+>     
+>     public QuestCollection getQuestCollection() {
+> 		return questCollection;
+> 	}
+> 
+> 	public void setQuestCollection(QuestCollection questCollection) {
+> 		this.questCollection = questCollection;
+> 	}
+> 
+> 	private long randomSeed;
+264a291,293
+>     private QuestCollection questCollection;
+> 
+>     private NBTTagCompound questsTag;
