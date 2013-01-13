@@ -42,6 +42,8 @@ You'll need ModLoader, and instructions given here are for Eclipse. If you're no
 
 ## I've pulled from git - now what?
 
+Read to the todo, first off.
+
 1. Readd the QuestKit folder to the Client project via New > Source Folder.
 
 2. Patch the World.java and WorldInfo.java patches in the diffs folder. Use a GNU patch compatible-program - patch itself is the gold standard. For example, I might first cd into the diffs folder, and issue the following invocations:
@@ -53,3 +55,11 @@ You'll need ModLoader, and instructions given here are for Eclipse. If you're no
 3. Sanity test Minecraft again. Generate javadocs from the QuestKit sources if you must.
 
 And then you're pretty much set. Happy hacking.
+
+## A caveat (and things TODO)
+
+This codebase simply isn't ready for modern versions of Minecraft:
+
+1. The architecture of Minecraft's SSP has changed *considerably* since this mod was first created - instead of the quick-and-cheap monolithic gameloop it now uses a server-client structure internally. This means the QuestKit's model and view code, nominally all merged into the QuestCollection, needs to be separated. Decidedly not trivial.
+
+2. A minor API quibble as well - an assumption made implicit by the QuestCollection is that one class only manifests as one actual quest by requiring indexing by type. This is annoying if we want to create quests that vary themselves randomly per-instance - instead, perhaps introduce another level of indexing by adding (more conservatively) a ClassInternalID, or (more ambitiously) UUIDs for each Quest instance. (Note, though, that we do not use references to specific Quest instances to do that indexing - try serializing *that*.)
