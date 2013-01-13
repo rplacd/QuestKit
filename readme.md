@@ -58,7 +58,7 @@ And then you're pretty much set. Happy hacking.
 
 ## A caveat (and things TODO)
 
-This codebase simply isn't ready for modern versions of Minecraft:
+The codebase simply isn't ready for modern versions of Minecraft:
 
 1. The architecture of Minecraft's SSP has changed *considerably* since this mod was first created - instead of the quick-and-cheap monolithic gameloop it now uses a server-client structure internally. This means the QuestKit's model and view code, nominally all merged into the QuestCollection, needs to be separated. Decidedly not trivial.
 
